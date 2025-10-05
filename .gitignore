@@ -23,3 +23,11 @@ Thumbs.db
 
 # Maven wrapper
 .mvn/wrapper/maven-wrapper.jar
+
+# backups
+**/pom.xml.versionsBackup
+**/pom.xml.releaseBackup
+**/release.properties
+
+# shade)
+**/dependency-reduced-pom.xml
