@@ -1,13 +1,18 @@
 package ru.dreamland.ExtraWGBlockRestricter;
 
+import java.util.Objects;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.plugin.java.JavaPlugin;
+
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.flags.Flag;
 import com.sk89q.worldguard.protection.flags.SetFlag;
 import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;
 import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.plugin.java.JavaPlugin;
+
+import ru.dreamland.ExtraWGBlockRestricter.command.ExtraWGBRCommand;
 import ru.dreamland.ExtraWGBlockRestricter.flags.BlockMaterialFlag;
 import ru.dreamland.ExtraWGBlockRestricter.listener.BlockListener;
 import ru.dreamland.ExtraWGBlockRestricter.util.Utils;
@@ -65,6 +70,12 @@ public final class ExtraWGBlockRestricterPlugin extends JavaPlugin {
 
         // Register listener
         Bukkit.getPluginManager().registerEvents(new BlockListener(this), this);
+        
+        // Регистрируем команду /ewgbr
+        ExtraWGBRCommand cmd = new ExtraWGBRCommand(this);
+        Objects.requireNonNull(getCommand("ewgbr"), "Команда ewgbr не объявлена в plugin.yml")
+                .setExecutor(cmd);
+        getCommand("ewgbr").setTabCompleter(cmd);
 
         getLogger().info("ExtraWGBlockRestricter enabled.");
     }

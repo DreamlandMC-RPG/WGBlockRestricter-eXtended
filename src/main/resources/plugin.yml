@@ -8,6 +8,18 @@ website: "https://github.com/dreamland-mc"
 load: STARTUP
 depend: [ WorldGuard ]
 
+commands:
+  ewgbr:
+    description: "Admin commands for ExtraWGBlockRestricter"
+    usage: "/ewgbr reload | version"
+    permission: extrawgblockrestricter.admin
+    aliases: [ extrawgbr, wgbr ]
+
+permissions:
+  extrawgblockrestricter.reload:
+    description: "Allow to reload config"
+    default: op
+
 permissions:
   wgblockrestricter.ignore:
     description: "Bypass ExtraWGBlockRestricter checks"
