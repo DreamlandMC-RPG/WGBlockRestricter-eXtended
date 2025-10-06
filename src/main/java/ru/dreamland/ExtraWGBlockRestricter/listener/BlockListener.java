@@ -4,6 +4,9 @@ import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.session.SessionManager;
+
+import java.util.Map;
+
 import org.bukkit.Material;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
@@ -15,10 +18,12 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.hanging.HangingPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import ru.dreamland.ExtraWGBlockRestricter.ExtraWGBlockRestricterPlugin;
+import ru.dreamland.ExtraWGBlockRestricter.messages.AdventureTexts;
 import ru.dreamland.ExtraWGBlockRestricter.util.Utils;
+import net.kyori.adventure.text.Component;
+
+
 
 public class BlockListener implements Listener {
     private final ExtraWGBlockRestricterPlugin plugin;
@@ -32,12 +37,16 @@ public class BlockListener implements Listener {
         SessionManager sm = WorldGuard.getInstance().getPlatform().getSessionManager();
         return sm.hasBypass(WorldGuardPlugin.inst().wrapPlayer(player), BukkitAdapter.adapt(player.getWorld()));
     }
+        // deny message understand MiniMessages and Legacy
+        private void sendMsg(Player p, String path, String def, Material mat) {
+        String raw = plugin.getConfig().getString(path, def);
+        if (raw == null || raw.isEmpty()) return;
 
-    private void sendMsg(Player p, String path, String def, Material mat) {
-        String pattern = plugin.getConfig().getString(path, def);
-        if (pattern == null || pattern.isEmpty()) return;
-        String prepared = pattern.replace("{block}", mat.name());
-        Component msg = LegacyComponentSerializer.legacyAmpersand().deserialize(prepared);
+        Component msg = AdventureTexts.parse(
+            raw,
+            Map.of("block", AdventureTexts.materialComponent(mat)) // <block> / {block} → locale component
+        );
+
         p.sendMessage(msg);
     }
 

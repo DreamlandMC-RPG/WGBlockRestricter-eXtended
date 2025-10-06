@@ -1,18 +1,39 @@
-# default configuration for WorldGuard Block Restricter
-# messages
-# leave empty if you do not want a message
-# you can use formatting codes (with &) for the messages
-# for more inforamtion look here: http://www.minecraftwiki.net/wiki/Formatting_codes
+# ╔═══════════════════════════════════════════════════════╗
+# ║              ExtraWGBlockRestricter Plugin            ║
+# ║          WorldGuard Block Restriction System          ║
+# ║                Messages default config                ║
+# ╚═══════════════════════════════════════════════════════╝
+#
+# You can use TWO formatting types:
+# 1) MiniMessage (Kyori Adventure): tag-based, rich formatting. Preferred.
+#    Tip: Prefix "<!mm>" to force MiniMessage parsing when needed.
+# 2) Legacy (&-codes): classic formatting like "&c", "&l", etc.
+#
+# Placeholders:
+# For MiniMessages use <block> it will be replaced with the player's block name (client-localized via translatable component).
+# For Legacy use {block}.
+#
+# To disable a message, set it to an empty string "".
+# Example:
+#   deny-block-place: ""
+#
+# Notes:
+# - Each key is provided twice: active MiniMessage first, and a commented legacy alternative right below it.
+# - Keep exactly one active line per key.
+
 messages:
-  # message when a player is denied to place a block:
-  # {block} is replaced with the block the player tried to place
-  deny-block-place: "&cYou are not allowed to place {block} here."
-  # message when a player is denied to break a block:
-  # {block} is replaced with the block the player tried to break
-  deny-block-break: "&cYou are not allowed to break {block} here."
-  # message when a player is denied to place a painting or an item frame:
-  # {block} is replaced with the block the player tried to place
-  deny-hanging-place: "&cYou are not allowed to place {block} here."
-  # message when a player is denied to break a painting or an item frame:
-  # {block} is replaced with the block the player tried to break
-  deny-hanging-break: "&cYou are not allowed to break {block} here."
+  # Message when a player is denied to place a block
+  deny-block-place: "<!mm><yellow> You are not allowed to place</yellow> <white><block></white> <yellow>here.</yellow>"
+  # deny-block-place: "&c You are not allowed to place &f{block} &chere."
+
+  # Message when a player is denied to break a block
+  deny-block-break: "<!mm><yellow> You are not allowed to break</yellow> <white><block></white> <yellow>here.</yellow>"
+  # deny-block-break: "&c You are not allowed to break &f{block} &chere."
+
+  # Message when a player is denied to place a painting or an item frame
+  deny-hanging-place: "<!mm><yellow> You are not allowed to place</yellow> <white><block></white> <yellow>here.</yellow>"
+  # deny-hanging-place: "&c You are not allowed to place &f{block} &chere."
+
+  # Message when a player is denied to break a painting or an item frame
+  deny-hanging-break: "<!mm><yellow> You are not allowed to break</yellow> <white><block></white> <yellow>here.</yellow>"
+  # deny-hanging-break: "&c You are not allowed to break &f{block} &chere."

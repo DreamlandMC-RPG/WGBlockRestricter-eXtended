@@ -6,7 +6,7 @@
 
   <groupId>ru.dreamland</groupId>
   <artifactId>ExtraWGBlockRestricter</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2-SNAPSHOT-a1</version>
   <name>ExtraWGBlockRestricter</name>
   <description>WorldGuard extension to allow/deny block types per region (no WGCustomFlags)</description>
   <url>https://github.com/dreamland-mc</url>
@@ -71,7 +71,17 @@
     <resources>
       <resource>
         <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>plugin.yml</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
         <filtering>false</filtering>
+        <excludes>
+          <exclude>plugin.yml</exclude>
+        </excludes>
       </resource>
     </resources>
     <plugins>
