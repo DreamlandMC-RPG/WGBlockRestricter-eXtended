@@ -1,6 +1,6 @@
 name: ExtraWGBlockRestricter
 main: ru.dreamland.ExtraWGBlockRestricter.ExtraWGBlockRestricterPlugin
-version: 1.0.2-SNAPSHOT
+version: ${project.version}
 api-version: "1.21"
 authors: [ "DJ_DarkLucky" ]
 description: "WorldGuard extension to allow/deny block types per region (no WGCustomFlags)."
